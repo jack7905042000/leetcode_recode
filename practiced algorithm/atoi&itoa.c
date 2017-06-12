@@ -27,7 +27,7 @@ char *itoa(int n){
 }
 
 void reverse(char *s){
-    int i=0,r=strlen(s);
+    int i=0,r=strlen(s)-1;
     char tmp;
     while(i<r){
         tmp = s[i];
