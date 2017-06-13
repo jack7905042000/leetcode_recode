@@ -1,0 +1,20 @@
+char* optimalDivision(int* nums, int numsSize) {
+    int i;
+    char* s = malloc(sizeof(char)*50);
+    char buff[5];
+    int sign = 0;
+    sprintf(s,"%d",nums[0]);
+    
+    for(i=1;i<numsSize;i++){
+        strcat(s,"/");
+        if(sign==0&&i+1<numsSize) {
+            strcat(s,"(");
+            sign = 1;
+        }
+        sprintf(buff,"%d",nums[i]);
+        strcat(s,buff);
+    }
+    
+    if(numsSize>2) strcat(s,")");
+    return s;
+}
