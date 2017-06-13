@@ -1,0 +1,10 @@
+int addDigits(int num) {
+    int sum,b,c;
+    sum = num;
+    while(sum>=10){
+        b=sum/10;
+        c=sum%10;
+        sum = b+c;
+    }
+    return sum;
+}
