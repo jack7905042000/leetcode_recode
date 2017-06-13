@@ -1,0 +1,11 @@
+int maxProfit(int* prices, int pricesSize) {
+    int buy,sell=pricesSize-1;
+    int sum = 0 ;
+    
+    for(buy=0;buy<pricesSize-1;buy++){
+        if(prices[buy+1]>prices[buy]) {
+            sum += prices[buy+1]-prices[buy];
+        }
+    }
+    return sum;
+}
