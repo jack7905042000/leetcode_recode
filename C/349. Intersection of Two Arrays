@@ -1,0 +1,36 @@
+/**
+ * Return an array of size *returnSize.
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+#define MIN(a,b) ((a<=b)?a:b)
+
+int comp(const void *a,const void * b){
+    return *(int*)a-*(int*)b;
+} 
+
+int* intersection(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize) {
+    int size = MIN(nums1Size,nums2Size);
+    int i=0,j=0;
+    int *summary = (int*)malloc(sizeof(int)*size);
+    //*summary = NULL;
+    int count = 0;
+    
+    qsort(nums1,nums1Size,sizeof(int),comp);
+    qsort(nums2,nums2Size,sizeof(int),comp);
+    
+    while(i<nums1Size&&j<nums2Size){
+        if(nums1[i]>nums2[j]) j++;
+        else if(nums1[i]<nums2[j]) i++;
+        else{
+            
+            if(count==0||nums1[i]!=summary[count-1]) {
+                summary[count++] = nums1[i];
+            }
+            i++;
+            j++;
+        }
+    }
+    
+    *returnSize=count;
+    return summary;
+}
