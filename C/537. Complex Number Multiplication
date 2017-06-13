@@ -1,0 +1,12 @@
+char* complexNumberMultiply(char* a, char* b) {
+    int a1,a2,b1,b2,A,B;
+    char *s =malloc(100*sizeof(char));
+    sscanf(a,"%d+%di",&a1,&b1);
+    sscanf(b,"%d+%di",&a2,&b2);
+    
+    A = a1*a2-(b1*b2);
+    B = a1*b2+a2*b1;
+     sprintf(s,"%d+%di",A,B);
+    return s;
+    
+}
