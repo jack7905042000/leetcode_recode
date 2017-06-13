@@ -1,0 +1,35 @@
+/**
+ * Return an array of size *returnSize.
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+
+void swap(int *a,int *b)  
+{  
+    int temp=*a;  
+    *a=*b;  
+    *b=temp;  
+} 
+ 
+int* findDisappearedNumbers(int* nums, int numsSize, int* returnSize) {
+    int i,j = 2;
+    int count = 0;
+    int *summary = (int*)malloc(sizeof(int)*numsSize);
+    //qsort(nums,numsSize,sizeof(int),comp);
+    
+    for(i=0;i<numsSize;i++){
+        if(nums[i]!=nums[nums[i]-1]){
+            swap(&nums[i],&nums[nums[i]-1]);
+            --i;
+        }
+    }
+    
+    for(i=0;i<numsSize;i++){
+        if(nums[i]!=i+1){
+            summary[count] = i+1;
+            count++;
+        }
+    }
+    
+    *returnSize = count;
+    return summary;
+}
