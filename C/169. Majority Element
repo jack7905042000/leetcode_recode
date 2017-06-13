@@ -1,0 +1,21 @@
+int comp(const void* a,const void* b){
+    return *(int*)a-*(int*)b;
+}
+
+int majorityElement(int* nums, int numsSize) {
+    int i;
+    int count = 1;
+    int tmp=0;
+    qsort(nums,numsSize,sizeof(int),comp);
+    
+    for(i=0;i<numsSize;i++){
+        tmp = nums[i];
+        while(tmp==nums[i+1]&&i<=numsSize-2){
+            count++;
+            i++;
+        }
+        if(count>(numsSize/2)) break;
+        count = 1;
+    }
+    return tmp;
+}
