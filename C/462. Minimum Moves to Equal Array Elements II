@@ -1,0 +1,19 @@
+int cmp ( const void *a , const void *b )
+{
+return *(int *)a - *(int *)b;
+}
+
+int minMoves2(int* nums, int numsSize) {
+    int i;
+    int count=0,mid=0;
+    qsort(nums,numsSize,sizeof(int),cmp);
+    
+    mid = nums[numsSize/2];
+    
+    for(i=0;i<numsSize;i++){
+        if(nums[i]<=mid) count+=mid-nums[i];
+        if(nums[i]>mid) count+=nums[i]-mid;
+    }
+
+    return count;
+}
