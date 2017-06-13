@@ -1,0 +1,24 @@
+/**
+ * Return an array of size *returnSize.
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int comp(const void* a,const void* b){
+    return *(int*)a-*(int*)b;
+}
+
+int* findDuplicates(int* nums, int numsSize, int* returnSize) {
+    int i;
+    int count=0;
+    int *summary = (int*) malloc(sizeof(int)*numsSize);
+    qsort(nums,numsSize,sizeof(int),comp);
+    
+    for(i=0;i<numsSize;i++){
+        if(nums[i]==nums[i+1]) {
+            summary[count] = nums[i];
+            count++;
+        }
+    }
+    
+    *returnSize= count;
+    return summary;
+}
