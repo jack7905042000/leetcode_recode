@@ -1,0 +1,20 @@
+int comp ( const void *a , const void *b )
+{
+return *(int *)a - *(int *)b;
+}
+
+int findContentChildren(int* g, int gSize, int* s, int sSize) {
+    int i=gSize-1,j=sSize-1;
+    int count = 0;
+    qsort(g,gSize,sizeof(int),comp);
+    qsort(s,sSize,sizeof(int),comp);
+    while(j>=0&&i>=0){
+            if(s[j]>=g[i]){
+                count++;
+                j--;
+                i--;
+            }
+            else i--;
+    }
+    return count;
+}
