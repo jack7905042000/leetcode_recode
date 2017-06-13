@@ -1,0 +1,31 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+int dfs(struct TreeNode* root,struct TreeNode** bot_left, int *mlevel,int level){
+    if(root == NULL) return 0;
+    
+    if(level > *mlevel){
+        *bot_left = root;
+        *mlevel = level;
+    } 
+    
+    int l = dfs(root->left,bot_left,mlevel,level+1);
+    int r = dfs(root->right,bot_left,mlevel,level+1);
+    
+    if(l>=r) return l+1;
+    else return r+1;
+}
+
+int findBottomLeftValue(struct TreeNode* root) {
+
+    int mlevel = -1;
+    struct TreeNode *bot_left = NULL;
+    dfs(root, &bot_left, &mlevel,0);
+    
+    return bot_left->val;
+}
