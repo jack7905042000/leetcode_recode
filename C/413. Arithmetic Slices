@@ -1,0 +1,24 @@
+int numberOfArithmeticSlices(int* A, int ASize) {
+    int num = 0;
+    int count=2;
+    int i=2,j=3,tmp=0;
+    tmp = A[1]-A[0];
+    
+    while(i<ASize){
+        if(A[i]-A[i-1]==tmp){
+            count++;
+        }
+        else{
+            if(count>=3){
+                num += ((count-1)*(count-2))*0.5;
+                count=2;
+            }
+            tmp = A[i]-A[i-1];
+        }
+        i++;
+    }
+
+    if(count>=3) num += ((count-1)*(count-2))*0.5;
+    
+    return num;
+}
