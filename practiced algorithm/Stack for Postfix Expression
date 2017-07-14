@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct Stack{
+    int top;
+    int capacity;
+    int* array;
+};
+
+struct Stack* creatStack(int size){
+    struct Stack *stack = (struct Stack*)malloc(sizeof(struct Stack));
+    stack->top = -1;
+    stack->capacity = size;
+    stack->array = (int*)malloc(sizeof(int)*(stack->capacity));
+}
+
+int evaluatePostfix(char* str){
+    struct Stack *stack = creatStack(strlen(str));
+    int i;
+    
+    for(i=0; i<strlen(str);i++){
+        if(isDigit(str[i])){
+            push(stack,(str[i]-'0'));
+        }
+        else{
+            int p1 = pop(stack);  //注意pop順序 p2在p1前出來
+            int p2 = pop(stack);
+            switch(str[i]){
+                case '+': push(stack,p2+p1); break;
+                case '-': push(stack,p2-p1); break;
+                case '*': push(stack,p2*p1); break;
+                case '/': push(stack,p2/p1); break;
+            }
+        }
+    }
+    return pop(stack);
+}
+
+int isDigit(char* str){
+    if(str>='0'&&str<='9') return 1;
+    else return 0;
+}
+
+int pop(struct Stack *stack){
+    if(stack->top!=-1)
+        return stack->array[(stack->top)--];
+}
+
+int push(struct Stack *stack,int num){
+    stack->array[++(stack->top)] = num;
+}
+
+int main()
+{
+    char a[] = "23*+923*-";
+    printf("the value of %s is %d",a,evaluatePostfix(a));
+    
+    return 0;
+}
+
