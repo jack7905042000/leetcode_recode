@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        int n = M.size(), count = 0;
+        vector<bool> book(n,false);
+        for(int i = 0; i<n; ++i){
+            if(book[i]==0){
+            DFS(M,i,book);
+            count++;
+            }
+        }
+        return count;
+    }
+    
+    void DFS(vector<vector<int>>& M, int n, vector<bool>& book){
+        book[n] = true;
+        for(int i = 0; i<M.size(); ++i){
+            if (M[n][i]!=0&&book[i]==0) DFS(M,i,book);
+        }
+    }
+};
