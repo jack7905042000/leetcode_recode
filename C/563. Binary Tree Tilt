@@ -1,0 +1,25 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int findTilt(TreeNode* root) {
+        int count = 0;
+        postorder(root,count);
+        
+        return count;
+    }
+    int postorder(TreeNode* node,int& count){
+        if(!node) return 0;
+        int lsum = postorder(node->left,count);
+        int rsum = postorder(node->right,count);
+        count += abs(lsum-rsum);
+        return node->val+lsum+rsum;
+    }
+};
