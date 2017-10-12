@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//#define MAN_QUEUE 5
+
+struct queue
+{
+    int data;
+    struct queue *next;
+};
+typedef struct queue *Point;
+
+Point front = NULL,rear = NULL;
+
+
+void add(int data){
+    Point new_node = malloc(sizeof(struct queue));
+    new_node->data = data;
+    new_node->next = NULL;
+    if(rear == NULL) front = new_node;
+    else rear->next = new_node;
+    rear = new_node;
+}
+
+void out(){
+    if(front == rear) rear = NULL;
+    Point ptr = front;
+    printf("%d ",ptr->data);
+    front = front->next;
+    free(ptr);
+}
+
+int main ()
+{
+        add(3);
+        add(5);
+        add(6);
+        add(5);
+        add(8);
+        add(9);
+        out();
+        out();
+        out();
+        out();
+        out();
+        out();
+
+}
